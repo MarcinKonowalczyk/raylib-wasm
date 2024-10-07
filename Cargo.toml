@@ -1,9 +1,9 @@
 [package]
-name = "raylib-light"
-version = "0.0.4"
+name = "raylib-wasm"
+version = "0.0.5"
 authors = ["Mark Tyrkba <marktyrkba456@gmail.com>"]
 license = "MIT"
-description = "raylib bindings"
+description = "raylib native/wasm bindings"
 repository = "https://github.com/rakivo/raylib-light"
 keywords = ["bindings", "raylib", "gamedev", "web", "wasm"]
 categories = ["api-bindings", "game-engines", "graphics"]
