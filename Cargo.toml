@@ -1,6 +1,6 @@
 [package]
 name = "raylib-light"
-version = "0.0.2"
+version = "0.0.4"
 authors = ["Mark Tyrkba <marktyrkba456@gmail.com>"]
 license = "MIT"
 description = "raylib bindings"

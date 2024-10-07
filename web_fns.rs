@@ -1,7 +1,6 @@
 use crate::{Rectangle, KeyboardKey, Color};
 
 extern {
-    pub fn WindowShouldClose() -> bool;
     pub fn DrawRectangleRec_(_: *const Rectangle, _: *const Color);
     pub fn DrawRectangle(_: i32, _: i32, _: i32, _: i32, _: Color);
     pub fn SetTargetFPS(_: i32);
