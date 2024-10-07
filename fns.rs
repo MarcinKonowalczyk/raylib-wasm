@@ -351,7 +351,11 @@ extern "C" {
     pub fn GetWorldToScreen2D(position: Vector2, camera: Camera2D) -> Vector2;
 }
 extern "C" {
+    #[cfg(not(feature = "web"))]
     pub fn SetTargetFPS(fps: ::std::os::raw::c_int);
+
+    #[cfg(feature = "web")]
+    pub fn SetTargetFPS_(fps: ::std::os::raw::c_int);
 }
 extern "C" {
     pub fn GetFrameTime() -> f32;
@@ -1750,7 +1754,17 @@ extern "C" {
     pub fn DrawFPS(posX: ::std::os::raw::c_int, posY: ::std::os::raw::c_int);
 }
 extern "C" {
+    #[cfg(not(feature = "web"))]
     pub fn DrawText(
+        text: *const ::std::os::raw::c_char,
+        posX: ::std::os::raw::c_int,
+        posY: ::std::os::raw::c_int,
+        fontSize: ::std::os::raw::c_int,
+        color: Color,
+    );
+
+    #[cfg(feature = "web")]
+    pub fn DrawText_(
         text: *const ::std::os::raw::c_char,
         posX: ::std::os::raw::c_int,
         posY: ::std::os::raw::c_int,
