@@ -1,6 +1,7 @@
 use crate::{Rectangle, KeyboardKey, Color};
 
 extern {
+    pub fn WindowShouldClose() -> bool;
     pub fn DrawRectangleRec_(_: *const Rectangle, _: *const Color);
     pub fn DrawRectangle(_: i32, _: i32, _: i32, _: i32, _: Color);
     pub fn SetTargetFPS(_: i32);
@@ -21,6 +22,10 @@ extern {
 //   You can't just pass a structure into the function and unwrap it' fields in JS via memory buffer,
 //   To the "unwrapping data via memory buffer" system to work we've got create this layer of
 //   abscration, maybe i'll find a way to avoid that, but for now idk
+
+pub unsafe fn WindowShouldClose() -> bool {
+    false
+}
 
 pub unsafe fn ClearBackground(color: Color) {
     ClearBackground_(std::ptr::addr_of!(color));
