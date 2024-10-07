@@ -1,6 +1,11 @@
 [package]
 name = "raylib"
-version = "0.1.0"
+version = "0.0.1"
+authors = ["Mark Tyrkba <marktyrkba456@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/rakivo/raylib-light"
+keywords = ["bindings", "raylib", "gamedev", "web", "wasm"]
+categories = ["api-bindings", "game-engines", "graphics"]
 edition = "2021"
 
 [lib]
