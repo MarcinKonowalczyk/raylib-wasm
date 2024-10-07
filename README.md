@@ -12,7 +12,7 @@
 
 # A process of porting a function from native to wasm
 > First, you need to check, if the function any structs, or it should be reimplemented manually in `JS`, because it can't work properly in browser as it does natively, do that:
-> - Go to `fns.rs`, find original function and add `_` to the end of its name if `feature="web"`, example:
+- Go to `fns.rs`, find original function and add `_` to the end of its name if `feature="web"`, example:
 ```rs
 extern "C" {
     #[cfg(not(feature = "web"))]
@@ -23,11 +23,12 @@ extern "C" {
 }
 ```
 
-> - If the function accepts any structs, you need to pass these structs via their address in memory, example:
+- If the function accepts any structs, you need to pass these structs via their address in memory, example:
 ```rs
 pub unsafe fn DrawRectangleRec(rec: Rectangle, color: Color) {
     DrawRectangleRec_(std::ptr::addr_of!(rec), std::ptr::addr_of!(color));
 }
 ```
+> Make this change in `web_fns.rs`
 
-> - Then, go to raylib.js, find the `WebAssembly.instantiateStreaming(fetch(WASM_PATH), {...` line, and implement your function in `JS` there, pretty self-explanatory from now on.
+- Then, go to `raylib.js`, find the `WebAssembly.instantiateStreaming(fetch(WASM_PATH), {...` line, and implement your function in `JS` there, pretty self-explanatory from now on.
