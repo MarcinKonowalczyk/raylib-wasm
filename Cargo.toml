@@ -1,12 +1,17 @@
 [package]
-name = "raylib"
-version = "0.0.1"
+name = "raylib-light"
+version = "0.0.2"
 authors = ["Mark Tyrkba <marktyrkba456@gmail.com>"]
 license = "MIT"
+description = "raylib bindings"
 repository = "https://github.com/rakivo/raylib-light"
 keywords = ["bindings", "raylib", "gamedev", "web", "wasm"]
 categories = ["api-bindings", "game-engines", "graphics"]
 edition = "2021"
+
+[features]
+web = []
+native = []
 
 [lib]
 crate-type = ["rlib"]
