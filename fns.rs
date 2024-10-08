@@ -765,7 +765,17 @@ extern "C" {
     pub fn DrawPixelV(position: Vector2, color: Color);
 }
 extern "C" {
+    #[cfg(not(feature = "web"))]
     pub fn DrawLine(
+        startPosX: ::std::os::raw::c_int,
+        startPosY: ::std::os::raw::c_int,
+        endPosX: ::std::os::raw::c_int,
+        endPosY: ::std::os::raw::c_int,
+        color: Color,
+    );
+
+    #[cfg(feature = "web")]
+    pub fn DrawLine_(
         startPosX: ::std::os::raw::c_int,
         startPosY: ::std::os::raw::c_int,
         endPosX: ::std::os::raw::c_int,
@@ -887,7 +897,7 @@ extern "C" {
     );
 
     #[cfg(feature = "web")]
-    pub fn DrawRectangle(
+    pub fn DrawRectangle_(
         posX: ::std::os::raw::c_int,
         posY: ::std::os::raw::c_int,
         width: ::std::os::raw::c_int,
@@ -896,7 +906,11 @@ extern "C" {
     );
 }
 extern "C" {
+    #[cfg(not(feature = "web"))]
     pub fn DrawRectangleV(position: Vector2, size: Vector2, color: Color);
+
+    #[cfg(feature = "web")]
+    pub fn DrawRectangleV_(position: Vector2, size: Vector2, color: Color);
 }
 extern "C" {
     #[cfg(not(feature = "web"))]

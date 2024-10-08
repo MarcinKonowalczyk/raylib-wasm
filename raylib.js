@@ -1,6 +1,6 @@
 'use strict';
 
-const WASM_PATH = "target/wasm32-unknown-unknown/debug/hotreload-raylib-template.wasm"
+const WASM_PATH = "<path to .wasm>"
 const FONT_SCALE_MAGIC = 0.65;
 const GLFW_MAP = {
     "Space":          32,

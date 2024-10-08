@@ -1,8 +1,12 @@
-use crate::{Rectangle, KeyboardKey, Color};
+use crate::{Rectangle, KeyboardKey, Vector2, Color};
+
+use std::ptr::addr_of;
 
 extern {
+    pub fn DrawLine_(_: i32, _: i32, _: i32, _: i32, _: *const Color,);
+    pub fn DrawRectangleV_(_: *const Vector2, _: *const Vector2, _: *const Color);
     pub fn DrawRectangleRec_(_: *const Rectangle, _: *const Color);
-    pub fn DrawRectangle(_: i32, _: i32, _: i32, _: i32, _: Color);
+    pub fn DrawRectangle_(_: i32, _: i32, _: i32, _: i32, _: *const Color);
     pub fn SetTargetFPS(_: i32);
     pub fn InitWindow(_: i32, _: i32, _: *const i8);
     pub fn BeginDrawing();
@@ -17,23 +21,34 @@ extern {
     pub fn GetFPS() -> i32;
 }
 
-// This functions are mandotory because without them all this won't work.
-//   You can't just pass a structure into the function and unwrap it' fields in JS via memory buffer,
-//   To the "unwrapping data via memory buffer" system to work we've got create this layer of
-//   abscration, maybe i'll find a way to avoid that, but for now idk
+// This functions are mandotory because without them the whole thing won't work.
+// You can't just pass a structure into a function and get it fields in JS via memory buffer,
+// To this thing to work we've got create this layer of abstraction.
+
+pub unsafe fn DrawLine(sx: i32, sy: i32, ex: i32, ey: i32, color: Color) {
+    DrawLine_(sx, sy, ex, ey, addr_of!(color))
+}
+
+pub unsafe fn DrawRectangleV(position: Vector2, size: Vector2, color: Color) {
+    DrawRectangleV_(addr_of!(position), addr_of!(size), addr_of!(color));
+}
 
 pub unsafe fn WindowShouldClose() -> bool {
     false
 }
 
 pub unsafe fn ClearBackground(color: Color) {
-    ClearBackground_(std::ptr::addr_of!(color));
+    ClearBackground_(addr_of!(color));
 }
 
 pub unsafe fn DrawText(text: *const i8, x: i32, y: i32, size: i32, color: Color) {
-    DrawText_(text, x, y, size, std::ptr::addr_of!(color));
+    DrawText_(text, x, y, size, addr_of!(color));
+}
+
+pub unsafe fn DrawRectangle(x: i32, y: i32, w: i32, h: i32, color: Color) {
+    DrawRectangle_(x, y, w, h, addr_of!(color));
 }
 
 pub unsafe fn DrawRectangleRec(rec: Rectangle, color: Color) {
-    DrawRectangleRec_(std::ptr::addr_of!(rec), std::ptr::addr_of!(color));
+    DrawRectangleRec_(addr_of!(rec), addr_of!(color));
 }
