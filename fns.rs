@@ -206,7 +206,11 @@ extern "C" {
     pub fn IsCursorOnScreen() -> bool;
 }
 extern "C" {
+    #[cfg(not(feature = "web"))]
     pub fn ClearBackground(color: Color);
+
+    #[cfg(feature = "web")]
+    pub fn ClearBackground_(color: Color);
 }
 extern "C" {
     pub fn BeginDrawing();
@@ -351,11 +355,7 @@ extern "C" {
     pub fn GetWorldToScreen2D(position: Vector2, camera: Camera2D) -> Vector2;
 }
 extern "C" {
-    #[cfg(not(feature = "web"))]
     pub fn SetTargetFPS(fps: ::std::os::raw::c_int);
-
-    #[cfg(feature = "web")]
-    pub fn SetTargetFPS_(fps: ::std::os::raw::c_int);
 }
 extern "C" {
     pub fn GetFrameTime() -> f32;
@@ -877,6 +877,16 @@ extern "C" {
     );
 }
 extern "C" {
+    #[cfg(not(feature = "web"))]
+    pub fn DrawRectangle(
+        posX: ::std::os::raw::c_int,
+        posY: ::std::os::raw::c_int,
+        width: ::std::os::raw::c_int,
+        height: ::std::os::raw::c_int,
+        color: Color,
+    );
+
+    #[cfg(feature = "web")]
     pub fn DrawRectangle(
         posX: ::std::os::raw::c_int,
         posY: ::std::os::raw::c_int,
@@ -889,7 +899,11 @@ extern "C" {
     pub fn DrawRectangleV(position: Vector2, size: Vector2, color: Color);
 }
 extern "C" {
+    #[cfg(not(feature = "web"))]
     pub fn DrawRectangleRec(rec: Rectangle, color: Color);
+
+    #[cfg(feature = "web")]
+    pub fn DrawRectangleRec_(rec: Rectangle, color: Color);
 }
 extern "C" {
     pub fn DrawRectanglePro(rec: Rectangle, origin: Vector2, rotation: f32, color: Color);
