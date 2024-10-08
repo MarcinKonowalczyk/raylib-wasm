@@ -9,6 +9,9 @@ keywords = ["bindings", "raylib", "gamedev", "web", "wasm"]
 categories = ["api-bindings", "game-engines", "graphics"]
 edition = "2021"
 
+[package.metadata]
+include = ["raylib.js"]
+
 [features]
 web = []
 native = []
