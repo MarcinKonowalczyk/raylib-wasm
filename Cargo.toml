@@ -1,6 +1,6 @@
 [package]
 name = "raylib-wasm"
-version = "0.0.9"
+version = "0.0.10"
 authors = ["Mark Tyrkba <marktyrkba456@gmail.com>"]
 license = "MIT"
 description = "raylib native/wasm bindings"
