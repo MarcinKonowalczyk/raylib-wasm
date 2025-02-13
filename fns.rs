@@ -206,11 +206,7 @@ extern "C" {
     pub fn IsCursorOnScreen() -> bool;
 }
 extern "C" {
-    #[cfg(not(feature = "web"))]
     pub fn ClearBackground(color: Color);
-
-    #[cfg(feature = "web")]
-    pub fn ClearBackground_(color: Color);
 }
 extern "C" {
     pub fn BeginDrawing();
@@ -765,17 +761,7 @@ extern "C" {
     pub fn DrawPixelV(position: Vector2, color: Color);
 }
 extern "C" {
-    #[cfg(not(feature = "web"))]
     pub fn DrawLine(
-        startPosX: ::std::os::raw::c_int,
-        startPosY: ::std::os::raw::c_int,
-        endPosX: ::std::os::raw::c_int,
-        endPosY: ::std::os::raw::c_int,
-        color: Color,
-    );
-
-    #[cfg(feature = "web")]
-    pub fn DrawLine_(
         startPosX: ::std::os::raw::c_int,
         startPosY: ::std::os::raw::c_int,
         endPosX: ::std::os::raw::c_int,
@@ -887,7 +873,6 @@ extern "C" {
     );
 }
 extern "C" {
-    #[cfg(not(feature = "web"))]
     pub fn DrawRectangle(
         posX: ::std::os::raw::c_int,
         posY: ::std::os::raw::c_int,
@@ -895,29 +880,12 @@ extern "C" {
         height: ::std::os::raw::c_int,
         color: Color,
     );
-
-    #[cfg(feature = "web")]
-    pub fn DrawRectangle_(
-        posX: ::std::os::raw::c_int,
-        posY: ::std::os::raw::c_int,
-        width: ::std::os::raw::c_int,
-        height: ::std::os::raw::c_int,
-        color: Color,
-    );
 }
 extern "C" {
-    #[cfg(not(feature = "web"))]
     pub fn DrawRectangleV(position: Vector2, size: Vector2, color: Color);
-
-    #[cfg(feature = "web")]
-    pub fn DrawRectangleV_(position: Vector2, size: Vector2, color: Color);
 }
 extern "C" {
-    #[cfg(not(feature = "web"))]
     pub fn DrawRectangleRec(rec: Rectangle, color: Color);
-
-    #[cfg(feature = "web")]
-    pub fn DrawRectangleRec_(rec: Rectangle, color: Color);
 }
 extern "C" {
     pub fn DrawRectanglePro(rec: Rectangle, origin: Vector2, rotation: f32, color: Color);
@@ -1782,17 +1750,7 @@ extern "C" {
     pub fn DrawFPS(posX: ::std::os::raw::c_int, posY: ::std::os::raw::c_int);
 }
 extern "C" {
-    #[cfg(not(feature = "web"))]
     pub fn DrawText(
-        text: *const ::std::os::raw::c_char,
-        posX: ::std::os::raw::c_int,
-        posY: ::std::os::raw::c_int,
-        fontSize: ::std::os::raw::c_int,
-        color: Color,
-    );
-
-    #[cfg(feature = "web")]
-    pub fn DrawText_(
         text: *const ::std::os::raw::c_char,
         posX: ::std::os::raw::c_int,
         posY: ::std::os::raw::c_int,
