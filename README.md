@@ -12,39 +12,33 @@
 
 # A process of porting a function from native to JS
 > First, you need to check, if the function any structs, or it should be reimplemented manually in `JS`, because it can't work properly in browser as it does natively, do that:
-- Go to `fns.rs`, find original function and add `_` to the end of its name if `feature="web"`, example:
+- Go to `web_fns.rs`, add your desired function to the `extern` block in the `ffi` module:
 ```rs
 extern "C" {
-    #[cfg(not(feature = "web"))]
+    // ...
     pub fn ClearBackground(color: Color);
-
-    #[cfg(feature = "web")]
-    pub fn ClearBackground_(color: Color);
 }
 ```
 
-- If the function accepts any structs, you need to pass these structs via their address in memory, do that in `web_fns.rs` example:
+- If the function accepts any structs, you need to pass these structs via their address in memory:
 ```rs
 pub unsafe fn DrawRectangleRec(rec: Rectangle, color: Color) {
-    DrawRectangleRec_(std::ptr::addr_of!(rec), std::ptr::addr_of!(color));
+    ffi::DrawRectangleRec(std::ptr::addr_of!(rec), std::ptr::addr_of!(color));
 }
 ```
 
-- Then, go to `raylib.js`, find the `WebAssembly.instantiateStreaming(fetch(WASM_PATH), {...` line, and implement your function in `JS` there. But keep in mind, if you added an `_` to the end of your function in Rust, you need to add it to the end in `JS` as well, example:
+- Then, go to `raylib.js`, find the `WebAssembly.instantiateStreaming(fetch(WASM_PATH), {...` line, and implement your function in `JS` there. But keep in mind:
 ```js
 WebAssembly.instantiateStreaming(fetch(WASM_PATH), {
     "env": make_environment({
-        ...
-
-        DrawRectangleRec_: (rec_ptr, color_ptr) => {
+        // ...
+        DrawRectangleRec: (rec_ptr, color_ptr) => {
             const buffer = wf.memory.buffer;
             const [x, y, w, h] = new Float32Array(buffer, rec_ptr, 4);
             const color = getColorFromMemory(buffer, color_ptr);
             ctx.fillStyle = color;
             ctx.fillRect(x, y, w, h);
         },
-
-        ...
     })
 }
 ```
